@@ -7,11 +7,15 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 app = Flask(__name__)
 
-@app.route('/today', methods=['GET'])
+@app.route('/', methods=['GET'])
 def index():
+    return "Date today!", 200
+
+@app.route('/today', methods=['GET'])
+def today():
     i = datetime.datetime.now()
 
-    result = {'date': "dd/mm/yyyy format =  %s/%s/%s" % (i.day, i.month, i.year)}
+    result = {'date': "%s/%s/%s" % (i.day, i.month, i.year)}
     return json.dumps(result), 200
 
 port=os.getenv('PORT', '5000')
